@@ -1,0 +1,16 @@
+{
+  "name": "poyectodoc",
+  "version": "1.0.0",
+  "description": "documentation sandbox",
+  "main": "index.js",
+  "scripts": {
+    "test": "jest"
+  },
+  "author": "Alejandro Forero Gomez",
+  "license": "ISC",
+  "devDependencies": {
+    "@types/express": "^4.17.17",
+    "@types/node": "^18.15.13",
+    "ts-node": "^10.9.1"
+  }
+}
