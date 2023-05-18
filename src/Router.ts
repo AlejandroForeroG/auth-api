@@ -14,7 +14,7 @@ class App{
             res.send('Hello World');
         });
     }
-    public listen():void{
+    public start():void{
         this.server = this.app.listen(3000,()=>{
             console.log('Server on port 3000');
         });
