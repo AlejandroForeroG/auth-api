@@ -1,5 +1,4 @@
-import App from './Router';
-import swaggerUI 
+import App from "./App";
 
-const  program = new App();
+const program = new App();
 program.start();
