@@ -3,6 +3,11 @@ import swaggerUI from "swagger-ui-express";
 import { swaggerSpecs } from "./swagger.conf";
 import PacienteRouter from "./routes/PacienteRouter";
 import MedicoRouter from "./routes/MedicoRouter";
+import FormularioRouter from "./routes/FormularioRouter";
+import CitaRouter from "./routes/CitaRouter";
+import EspecialidadRouter from "./routes/EspecialidadRouter";
+import cors from "cors";
+
 class App {
   /**
    * Clase principal del aplicativo define las rutas de la api
@@ -20,21 +25,29 @@ class App {
   constructor() {
     /**
      * Express es la bublioteca que nos permite crear el servidor y
-     * definir las rutas de la api
+     * 
      */
     this.app = express();
     this.app.use(express.json());
     this.app.use("/api-docs", swaggerUI.serve, swaggerUI.setup(swaggerSpecs));
-    
+    this.app.use(cors())
     this.routes();
   }
+  /**
+   * Aqui se definen las rutas de la api
+   */
   private routes(): void {
   
-    this.app.use("/api/paciente", new PacienteRouter().router);
-    this.app.use("/api/medicos",new MedicoRouter().router)
+    this.app.use("/", PacienteRouter);
+    this.app.use("/",MedicoRouter)
+    this.app.use("/",FormularioRouter)
+    this.app.use("/",CitaRouter)
+    this.app.use("/",EspecialidadRouter)
     
   }
-
+/**
+ * metodos para iniciar y parar el servidor 
+ */
   public start(): void {
     this.server = this.app.listen(3000, () => {
       console.log("Server on port 3000");

@@ -1,7 +1,10 @@
 import { Response, Request } from "express";
 import { PrismaClient } from "@prisma/client";
-
 class PacienteController {
+  /**
+   * Controller de Paciente se encarga de dar la logica del negocio a las rutas
+   * 
+   */
   private prismaClient: PrismaClient;
   constructor() {
     this.prismaClient = new PrismaClient();

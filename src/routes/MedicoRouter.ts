@@ -1,8 +1,12 @@
 import {Router,Response,Request} from "express";
 import MedicoController from "../controllers/MedicoController";
 
-
 class MedicoRouter{
+    /**
+     * Router de medico se encarga tomando  de asignar
+     * el controlador a cada ruta correpsndiente
+     * 
+     */
     router:Router;
     medicoController:MedicoController;
 
@@ -21,5 +25,5 @@ class MedicoRouter{
         });
     }
 }
-
-export default MedicoRouter;
+const miRouter = new MedicoRouter();
+export default miRouter.router;

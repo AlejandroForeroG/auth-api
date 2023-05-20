@@ -1,7 +1,11 @@
 import { Router, Response, Request } from "express";
 import PacienteController from "../controllers/PacienteController";
-
 class PacienteRouter {
+  /**
+   * Router de paciente se encarga tomando  de asignar
+   * el controlador a cada ruta correpsndiente
+   * 
+   */
   router: Router;
   pacienteController: PacienteController;
   constructor() {
@@ -19,5 +23,5 @@ class PacienteRouter {
     });
   }
 }
-
-export default PacienteRouter;
+const miRouter = new PacienteRouter();
+export default  miRouter.router
