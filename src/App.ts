@@ -1,4 +1,6 @@
 import express, { Application, Request, Response } from "express";
+import dotenv from "dotenv";
+dotenv.config();
 import swaggerUI from "swagger-ui-express";
 import { swaggerSpecs } from "./swagger.conf";
 import PacienteRouter from "./routes/PacienteRouter";
@@ -6,6 +8,9 @@ import MedicoRouter from "./routes/MedicoRouter";
 import FormularioRouter from "./routes/FormularioRouter";
 import CitaRouter from "./routes/CitaRouter";
 import EspecialidadRouter from "./routes/EspecialidadRouter";
+import routerAuth from "./routes/authroutes";
+import passport from "passport";
+import myStrategy from "./config/passport";
 import cors from "cors";
 
 class App {
@@ -31,6 +36,9 @@ class App {
     this.app.use(express.json());
     this.app.use("/api-docs", swaggerUI.serve, swaggerUI.setup(swaggerSpecs));
     this.app.use(cors())
+    this.app.use("/auth", routerAuth);
+    passport.use(myStrategy);
+    this.app.use(passport.initialize());
     this.routes();
   }
   /**
@@ -38,11 +46,11 @@ class App {
    */
   private routes(): void {
   
-    this.app.use("/", PacienteRouter);
-    this.app.use("/",MedicoRouter)
-    this.app.use("/",FormularioRouter)
-    this.app.use("/",CitaRouter)
-    this.app.use("/",EspecialidadRouter)
+    this.app.use("/",passport.authenticate('jwt',{session:false}) , PacienteRouter);
+    this.app.use("/",passport.authenticate('jwt',{session:false}) ,MedicoRouter)
+    this.app.use("/",passport.authenticate('jwt',{session:false}) ,FormularioRouter)
+    this.app.use("/",passport.authenticate('jwt',{session:false}) ,CitaRouter)
+    this.app.use("/",passport.authenticate('jwt',{session:false}) ,EspecialidadRouter)
     
   }
 /**
